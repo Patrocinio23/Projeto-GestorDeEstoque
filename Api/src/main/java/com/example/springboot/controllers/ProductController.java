@@ -30,12 +30,21 @@ public class ProductController {
         
 	
 	@GetMapping("/products")
+	//Essas anotações permitem que voce associe URLs específicas com métodos de manipulação HTTP no seu controlador, tornando a construção de APIs web mais simples.
+	//uma anotação @ é simplesmente uma marca que voce coloca em cima de uma classe, método, campo, etc. Elas podem ser interpretadas por ferramentas, framework ou bibliotecas que usam essas informações.
 	public ResponseEntity<List<ProductModel>> getAllProducts(){
 		List<ProductModel> productsList = productRepository.findAll();
+		//essa lista foi declarada para aceitar apenas objetos do tipo ProductModel ou de suas subclasses.
+		//os sinais <> são usados para classes Genéricas, onde o tipo de dado é definido no momento do instanciamento.
 		if(!productsList.isEmpty()) {
+			//productList é gerada e populada a partir de uma coleção de objetos do tipo ProductModel, que pode ser retornado de uma cosulta ao banco de dados ou criada manualmente
 			for(ProductModel product : productsList) {
+				//em cada iteração a variavel product será uma instancia individual de um objeto ProductModel.
+				//product é uma instancia da classe ProductModel
+				//productList é uma instancia de uma lista (como List<ProductModel>), que contem várias instancias (objetos) da classe ProductModel.
 				Integer id = product.getidProduct();
 				product.add(linkTo(methodOn(ProductController.class).getOneProduct(id)).withSelfRel());
+				//HATEOS é uma forma de enriquecer as respostas da API com links que indicam o que o cliente pode fazer a seguir, facilitando a interação sem precisar saber os detalhes das rotas.
 			}
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(productsList);
