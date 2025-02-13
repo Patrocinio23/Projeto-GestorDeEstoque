@@ -3,6 +3,7 @@ package com.example.springboot.controllers;
 import com.example.springboot.dtos.ProductRecordDto;
 import com.example.springboot.models.ProductModel;
 import com.example.springboot.repositories.ProductRepository;
+import com.example.springboot.service.ProductService;
 import com.example.springboot.services.TwilioService.TwilioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -23,7 +24,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class ProductController {
 	
 	@Autowired
-	ProductRepository productRepository;
+	/*ProductRepository productRepository;
+     o Repository não sera mais injetado direto na minha controller, porque agora vou ter uma service*/
+	ProductService productService;
+	//a partir de agora a comunicação da minha controller sera com a minha service.
+	//o ProductService está sendo injetado no ProductController com o uso da anotação @Autowired. Isso faz com que o Spring gerencie a criação da instancia do ProductService automaticamente.
         
         @Autowired
         private TwilioService twilioService;
@@ -33,6 +38,7 @@ public class ProductController {
 	//Essas anotações permitem que voce associe URLs específicas com métodos de manipulação HTTP no seu controlador, tornando a construção de APIs web mais simples.
 	//uma anotação @ é simplesmente uma marca que voce coloca em cima de uma classe, método, campo, etc. Elas podem ser interpretadas por ferramentas, framework ou bibliotecas que usam essas informações.
 	public ResponseEntity<List<ProductModel>> getAllProducts(){
+		//ResponseEntity é uma classe do Spring Framework, ela herda de HttoEntity, o que significa que ela tem acesso aos cabeçalhos HTTP e ao corpo da resposta.
 		List<ProductModel> productsList = productRepository.findAll();
 		//essa lista foi declarada para aceitar apenas objetos do tipo ProductModel ou de suas subclasses.
 		//os sinais <> são usados para classes Genéricas, onde o tipo de dado é definido no momento do instanciamento.
