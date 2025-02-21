@@ -2,22 +2,22 @@ package com.example.springboot.controllers;
 
 import com.example.springboot.dtos.ProductRecordDto;
 import com.example.springboot.models.ProductModel;
-import com.example.springboot.repositories.ProductRepository;
+/*import com.example.springboot.repositories.ProductRepository;*/
 import com.example.springboot.service.ProductService;
-import com.example.springboot.services.TwilioService.TwilioService;
+/*import com.example.springboot.services.TwilioService.TwilioService;*/
 import jakarta.validation.Valid;
-import org.springframework.beans.BeanUtils;
+/*import org.springframework.beans.BeanUtils;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+/*import java.util.List;
 import java.util.Optional;
 
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;*/
 
 
 //Essas anotações permitem que voce associe URLs específicas com métodos de manipulação HTTP no seu controlador, tornando a construção de APIs web mais simples.
@@ -30,11 +30,11 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
         
-        @Autowired
-        private TwilioService twilioService;
+       /*@Autowired
+        private TwilioService twilioService;*/
         
 	
-	@GetMapping("/products")
+	/*@GetMapping("/products")
 	public ResponseEntity<List<ProductModel>> getAllProducts() {
 		List<ProductModel> productsList = productService.getAllProducts();
 	return ResponseEntity.status(HttpStatus.OK).body(productsList);
@@ -47,23 +47,21 @@ public class ProductController {
    @GetMapping("/products/{id}")
     public ResponseEntity<Object> getOneProduct(@PathVariable Integer id){
 		return productService.getOneProduct(id);
-	}
+	}*/
 	
-	/*@PostMapping("/products")
+	@PostMapping("/products")
 	public ResponseEntity<ProductModel> saveProduct(@RequestBody @Valid ProductRecordDto productRecordDto) {
-		var productModel = new ProductModel();
-		BeanUtils.copyProperties(productRecordDto, productModel);
+	return ResponseEntity.status(HttpStatus.CREATED).body(productService.saveProduct(productRecordDto));
+	}
                 
                // Envia o SMS após o produto ser salvo
-                String messageContent = "Produto novo: " + productModel.getName() + // Personalize a mensagem com o nome do produto
+              /*   String messageContent = "Produto novo: " + productModel.getName() + // Personalize a mensagem com o nome do produto
                                         "Caracteristicas: " + productModel.getCaracteristicas();
-                twilioService.sendSms(messageContent);
+                twilioService.sendSms(messageContent);*/
 		
-                
-                return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.save(productModel));
 	}
 	
-	@DeleteMapping("/products/{id}")
+	/*@DeleteMapping("/products/{id}")
 	public ResponseEntity<Object> deleteProduct(@PathVariable Integer id) {
 		Optional<ProductModel> product = productRepository.findById(id);
 		if(product.isEmpty()) {
@@ -85,4 +83,4 @@ public class ProductController {
 	}*/
 
     
-}
+

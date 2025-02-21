@@ -4,13 +4,18 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import java.util.Optional;
 import java.util.List;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import com.example.springboot.controllers.ProductController;
+import com.example.springboot.dtos.ProductRecordDto;
 import com.example.springboot.models.ProductModel;
 import com.example.springboot.repositories.ProductRepository;
+
 
 @Service
 public class ProductService {
@@ -18,17 +23,25 @@ public class ProductService {
 @Autowired
 ProductRepository productRepository;
 
-public ResponseEntity<List<ProductModel>> getAllProducts() {
-    List<ProductModel> productsList = productRepository.findAll();
-    if(productsList.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(productsList);
+
+/*public ResponseEntity<List<ProductModel>> getAllProducts() {
+
+    try{
+    List<ProductModel> productList = productRepository.findAll();
+    if(productList.isEmpty()) {
+        throw new ProductNotFoundException("Lista de Produtos não encontrada");
      } else {
-           for(ProductModel product : productsList) {
+           for(ProductModel product : productList) {
             Integer id = product.getidProduct();
             product.add(linkTo(methodOn(ProductController.class).getOneProduct(id)).withSelfRel());
         }
-        return ResponseEntity.status(HttpStatus.OK).body(productsList);
+        return();
     }
+    } catch (Exception e) {
+        throw new RuntimeException("Erro ao buscar a lista de produtos: " + e.getMessage());
+    
+    }
+    
 }
                               /*FOR*/
 
@@ -52,16 +65,27 @@ public ResponseEntity<List<ProductModel>> getAllProducts() {
  */ 
 
 
- public ResponseEntity<Object> getOneProduct(Integer id) {
+ /*public Object getOneProduct(Integer id) {
+    try {
     Optional<ProductModel> product = productRepository.findById(id);
-    if(product.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
-        
+    if (product.isPresent()) {
+        return product.get();
+    } else {
+        throw new ProductNotFoundException("Produto não encontrado");
     }
-    product.get().add(linkTo(methodOn
-    (ProductController.class).getAllProducts()).
-    withRel("Products List"));
-    return ResponseEntity.status(HttpStatus.OK).body(product.get());
+ } catch(Exception e){
+    throw new RuntimeException("Erro ao buscar o produto: " + e.getMessage());
+ }
+   
+  }*/
+
+
+
+  public ProductModel saveProduct(ProductRecordDto productRecordDto) {
+        ProductModel productModel= new ProductModel();
+        BeanUtils.copyProperties(productRecordDto, productModel);
+        return productRepository.save(productModel);
+  
   }
 
-}
+} 
