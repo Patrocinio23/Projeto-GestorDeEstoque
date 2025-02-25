@@ -1,17 +1,11 @@
 package com.example.springboot.service;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-import java.util.Optional;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.springboot.controllers.ProductController;
 import com.example.springboot.dtos.ProductRecordDto;
 import com.example.springboot.models.ProductModel;
 import com.example.springboot.repositories.ProductRepository;
@@ -24,24 +18,10 @@ public class ProductService {
 ProductRepository productRepository;
 
 
-/*public ResponseEntity<List<ProductModel>> getAllProducts() {
-
-    try{
+public List<ProductModel> getAllProducts() {
     List<ProductModel> productList = productRepository.findAll();
-    if(productList.isEmpty()) {
-        throw new ProductNotFoundException("Lista de Produtos não encontrada");
-     } else {
-           for(ProductModel product : productList) {
-            Integer id = product.getidProduct();
-            product.add(linkTo(methodOn(ProductController.class).getOneProduct(id)).withSelfRel());
-        }
-        return();
-    }
-    } catch (Exception e) {
-        throw new RuntimeException("Erro ao buscar a lista de produtos: " + e.getMessage());
-    
-    }
-    
+    return(productList);
+        
 }
                               /*FOR*/
 

@@ -1,23 +1,21 @@
 package com.example.springboot.controllers;
 
-import com.example.springboot.dtos.ProductRecordDto;
-import com.example.springboot.models.ProductModel;
-/*import com.example.springboot.repositories.ProductRepository;*/
-import com.example.springboot.service.ProductService;
-/*import com.example.springboot.services.TwilioService.TwilioService;*/
-import jakarta.validation.Valid;
-/*import org.springframework.beans.BeanUtils;*/
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-/*import java.util.List;
-import java.util.Optional;
+import com.example.springboot.dtos.ProductRecordDto;
+import com.example.springboot.models.ProductModel;
+import com.example.springboot.service.ProductService;
 
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;*/
+import jakarta.validation.Valid;
 
 
 //Essas anotações permitem que voce associe URLs específicas com métodos de manipulação HTTP no seu controlador, tornando a construção de APIs web mais simples.
@@ -34,17 +32,17 @@ public class ProductController {
         private TwilioService twilioService;*/
         
 	
-	/*@GetMapping("/products")
+	@GetMapping("/products")
 	public ResponseEntity<List<ProductModel>> getAllProducts() {
 		List<ProductModel> productsList = productService.getAllProducts();
-	return ResponseEntity.status(HttpStatus.OK).body(productsList);
+	    return ResponseEntity.status(HttpStatus.OK).body(productsList);
 	}
 	
    //essa lista foi declarada para aceitar apenas objetos do tipo ProductModel ou de suas subclasses.
    //os sinais <> são usados para classes Genéricas, onde o tipo de dado é definido no momento do instanciamento.
 	
 	
-   @GetMapping("/products/{id}")
+   /*@GetMapping("/products/{id}")
     public ResponseEntity<Object> getOneProduct(@PathVariable Integer id){
 		return productService.getOneProduct(id);
 	}*/

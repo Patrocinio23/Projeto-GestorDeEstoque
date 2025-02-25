@@ -1,13 +1,15 @@
 package com.example.springboot.models;
 
 
+import java.io.Serializable;
+
+import org.springframework.hateoas.RepresentationModel;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.io.Serializable;
-import org.springframework.hateoas.RepresentationModel;
 
 @Entity
 @Table(name = "tb_products")
@@ -21,11 +23,11 @@ public class ProductModel extends RepresentationModel<ProductModel> implements S
 	private String name;
 	private String caracteristicas;
 
-	public Integer getidProduct() {
+	public Integer getIdProduct() {
 		return idProduct;
 	}
 
-	public void setidProduct(Integer idProduct) {
+	public void setIdProduct(Integer idProduct) {
 		this.idProduct = idProduct;
 	}
 
