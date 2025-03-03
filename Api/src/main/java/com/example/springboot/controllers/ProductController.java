@@ -1,16 +1,18 @@
 package com.example.springboot.controllers;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import java.util.Optional; 
 import com.example.springboot.dtos.ProductRecordDto;
 import com.example.springboot.models.ProductModel;
 import com.example.springboot.service.ProductService;
@@ -57,21 +59,27 @@ public class ProductController {
                // Envia o SMS após o produto ser salvo
               /*   String messageContent = "Produto novo: " + productModel.getName() + // Personalize a mensagem com o nome do produto
                                         "Caracteristicas: " + productModel.getCaracteristicas();
-                twilioService.sendSms(messageContent);*/
+                twilioService.sendSms(messageContent);
+		
+	}*/
+	
+	@DeleteMapping("/products/{id}")
+	public ResponseEntity<Object> deleteProduct(@PathVariable Integer id) {
+		ProductModel product = productService.getOneProduct(id);
+		if(product == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+		} else{
+           productService.deleteProduct(id);
+
+			return ResponseEntity.status(HttpStatus.OK).body("Product deleted successfully.");
+
+		}
+
+	}
 		
 	}
 	
-	/*@DeleteMapping("/products/{id}")
-	public ResponseEntity<Object> deleteProduct(@PathVariable Integer id) {
-		Optional<ProductModel> product = productRepository.findById(id);
-		if(product.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
-		}
-		productRepository.delete(product.get());
-		return ResponseEntity.status(HttpStatus.OK).body("Product deleted successfully.");
-	}
-	
-	@PutMapping("/products/{id}")
+	/*@PutMapping("/products/{id}")
 	public ResponseEntity<Object> updateProduct(@PathVariable Integer id, @RequestBody @Valid ProductRecordDto productRecordDto) {
 		Optional<ProductModel> productO = productRepository.findById(id);
 		if(productO.isEmpty()) {

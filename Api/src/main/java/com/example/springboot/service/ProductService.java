@@ -56,13 +56,19 @@ public List<ProductModel> getAllProducts() {
    
 }
 
-
-
   public ProductModel saveProduct(ProductRecordDto productRecordDto) {
         ProductModel productModel= new ProductModel();
         BeanUtils.copyProperties(productRecordDto, productModel);
         return productRepository.save(productModel);
   
   }
+
+ public void deleteProduct(Integer id) {
+    Optional<ProductModel> product = productRepository.findById(id);
+    if(product.isPresent()){
+       productRepository.delete(product.get());
+    }
+  
+}
 
 } 
