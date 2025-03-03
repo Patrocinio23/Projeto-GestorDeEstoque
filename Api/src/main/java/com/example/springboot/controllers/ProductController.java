@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.Optional; 
 import com.example.springboot.dtos.ProductRecordDto;
 import com.example.springboot.models.ProductModel;
 import com.example.springboot.service.ProductService;
@@ -77,18 +77,21 @@ public class ProductController {
 
 	}
 		
-	}
 	
-	/*@PutMapping("/products/{id}")
+	
+	@PutMapping("/products/{id}")
 	public ResponseEntity<Object> updateProduct(@PathVariable Integer id, @RequestBody @Valid ProductRecordDto productRecordDto) {
-		Optional<ProductModel> productO = productRepository.findById(id);
-		if(productO.isEmpty()) {
+		ProductModel product = productService.getOneProduct(id);
+		if(product == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
-		}
-		var productModel = productO.get();
-		BeanUtils.copyProperties(productRecordDto, productModel);
-		return ResponseEntity.status(HttpStatus.OK).body(productRepository.save(productModel));
-	}*/
+		} else {
+			 ProductModel updatedProduct = productService.updateProduct(id, productRecordDto);
 
-    
+			 return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
+		}
+	
+	
+	}
+
+}
 

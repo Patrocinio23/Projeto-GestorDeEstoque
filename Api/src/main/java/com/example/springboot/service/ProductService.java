@@ -28,7 +28,6 @@ public List<ProductModel> getAllProducts() {
 
 //productList é gerada e populada a partir de uma coleção de objetos do tipo ProductModel que pode ser retornando de uma consulta ao banco de dados ou criada manualmente.
 //productList é uma lista de objetos do tipo ProductModel
-//em cada iteração a variavel product será uma instancia individual de um objeto ProductModel.
 //product é uma instancia da classe ProductModel
 //productList é uma instancia de uma lista (como List<ProductModel>), que contem várias instancias (objetos) da classe ProductModel.
 
@@ -37,12 +36,8 @@ public List<ProductModel> getAllProducts() {
 
 /*Quando voce usa o "methodOn(ProductController.class)", voce esta passando ProductController.class diretamente para o methodOn(). Isso faz com que o methodOn() utilize a reflexão para "criar" a instancia virtual do controlador e chamar o método desejado sem a necessidade de voce instancia-lo manualmente. */
 
-/*Aqui:
- * methodOn(ProductController.class) é a classe do controlador.
- 
- * methodOn(ProductController.class) usa essa classe para simular a criação de um objeto do controlador.
- 
- * o método "getOneProduct(id)" será chamado virtualmente (não precisa instanciar um objeto de ProductController explicitamente).
+
+ /* o método "getOneProduct(id)" será chamado virtualmente (não precisa instanciar um objeto de ProductController explicitamente).
  */ 
 
 
@@ -71,4 +66,22 @@ public List<ProductModel> getAllProducts() {
   
 }
 
+public ProductModel updateProduct(Integer id, ProductRecordDto productRecordDto){
+  Optional<ProductModel> product = productRepository.findById(id);
+  if(product.isPresent()){
+    ProductModel productModel = product.get();
+
+    BeanUtils.copyProperties(productRecordDto, productModel);
+    productRepository.save(productModel);
+
+    return productModel;
+  } else {
+    throw new RuntimeException("Product not found");
+  }
+ 
+}
+
 } 
+/*Entenda!! voce precisa prestar mais atenção nas classes que estão sendo utilizadas, 
+e se ligar no que elas retornam, e quais métodos estão diponiveis nelas para
+utilizar*/
