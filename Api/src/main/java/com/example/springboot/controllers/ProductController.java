@@ -1,12 +1,12 @@
 package com.example.springboot.controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,11 +42,13 @@ public class ProductController {
    //os sinais <> são usados para classes Genéricas, onde o tipo de dado é definido no momento do instanciamento.
 	
 	
-   /*@GetMapping("/products/{id}")
+   @GetMapping("/products/{id}")
     public ResponseEntity<Object> getOneProduct(@PathVariable Integer id){
-		return productService.getOneProduct(id);
-	}*/
+	    ProductModel product = productService.getOneProduct(id);
+		return ResponseEntity.ok(product);
+	}
 	
+
 	@PostMapping("/products")
 	public ResponseEntity<ProductModel> saveProduct(@RequestBody @Valid ProductRecordDto productRecordDto) {
 	return ResponseEntity.status(HttpStatus.CREATED).body(productService.saveProduct(productRecordDto));

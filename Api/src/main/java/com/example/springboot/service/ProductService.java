@@ -1,6 +1,7 @@
 package com.example.springboot.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,19 +46,15 @@ public List<ProductModel> getAllProducts() {
  */ 
 
 
- /*public Object getOneProduct(Integer id) {
-    try {
+ public ProductModel getOneProduct(Integer id) {
     Optional<ProductModel> product = productRepository.findById(id);
     if (product.isPresent()) {
-        return product.get();
-    } else {
-        throw new ProductNotFoundException("Produto não encontrado");
+      return product.get(); 
     }
- } catch(Exception e){
-    throw new RuntimeException("Erro ao buscar o produto: " + e.getMessage());
- }
+    
+   return null;
    
-  }*/
+}
 
 
 
