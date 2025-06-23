@@ -16,13 +16,13 @@ public class EstoqueModel extends RepresentationModel<EstoqueModel> implements S
     private static final long serialVersionUID = 1L;
 
         @Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	    @GeneratedValue(strategy=GenerationType.SEQUENCE)
         private Integer idEstoque;
-	private Integer idProduct;
+	    private Integer idProduct;
         public Integer quantidade;
         
         
-        public Integer getidEstoque() {
+    public Integer getidEstoque() {
 		return idEstoque;
 	}
 
