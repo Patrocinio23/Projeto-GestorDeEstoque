@@ -1,13 +1,17 @@
 package com.example.springboot.models;
 
 
+import java.io.Serializable;
+
+import org.springframework.hateoas.RepresentationModel;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.io.Serializable;
-import org.springframework.hateoas.RepresentationModel;
 
 @Entity
 @Table(name = "tb_products")
@@ -17,15 +21,24 @@ public class ProductModel extends RepresentationModel<ProductModel> implements S
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
        
-	private Integer idProduct;
+	private Long idProduct;
 	private String name;
 	private String caracteristicas;
 
-	public Integer getidProduct() {
+	@ManyToOne
+    @JoinColumn(name = "id_categoria") // essa será a chave estrangeira no banco
+    private CategoriaModel categoria;
+
+	
+    public void setCategoria(CategoriaModel categoria) {
+    this.categoria = categoria;
+    }
+ 
+	public Long getidProduct() {
 		return idProduct;
 	}
 
-	public void setidProduct(Integer idProduct) {
+	public void setidProduct(Long idProduct) {
 		this.idProduct = idProduct;
 	}
 
@@ -44,4 +57,6 @@ public class ProductModel extends RepresentationModel<ProductModel> implements S
 	public void setCaracteristicas(String caracteristicas) {
 		this.caracteristicas = caracteristicas;
 	}
+
+
 }

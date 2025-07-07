@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.springboot.dtos.ProductRecordDto;
+import com.example.springboot.models.CategoriaModel;
 import com.example.springboot.models.ProductModel;
+import com.example.springboot.repositories.CategoriaRepository;
 import com.example.springboot.repositories.ProductRepository;
 
 @Service
@@ -16,6 +18,7 @@ public class ProductService {
 
 @Autowired
 ProductRepository productRepository;
+CategoriaRepository categoriaRepository;
 
 
 public List<ProductModel> getAllProducts() {
@@ -53,6 +56,14 @@ public List<ProductModel> getAllProducts() {
   public ProductModel saveProduct(ProductRecordDto productRecordDto) {
         ProductModel productModel= new ProductModel();
         BeanUtils.copyProperties(productRecordDto, productModel);
+
+        // Aqui você trata o campo que o BeanUtils não entende
+        CategoriaModel categoria = categoriaRepository.findById(productRecordDto.idCategoria())
+       .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+
+       productModel.setCategoria(categoria);
+
+
         return productRepository.save(productModel);
   
   }
