@@ -17,7 +17,7 @@ public class EstoqueModel extends RepresentationModel<EstoqueModel> implements S
         @Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
         private Integer idEstoque;
-	private Integer idProduct;
+	    private Integer idProduct;
         public Integer quantidade;
         
         
