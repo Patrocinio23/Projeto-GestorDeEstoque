@@ -1,4 +1,4 @@
-package com.example.springboot.service;
+/*package com.example.springboot.service;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -38,7 +38,7 @@ public List<ProductModel> getAllProducts() {
  * methodOn(ProductController.class) usa essa classe para simular a criação de um objeto do controlador.
  
  * o método "getOneProduct(id)" será chamado virtualmente (não precisa instanciar um objeto de ProductController explicitamente).
- */ 
+ 
 
  public ResponseEntity<Object> getOneProduct(Integer id) {
     Optional<ProductModel> product = productRepository.findById(id);
@@ -52,4 +52,4 @@ public List<ProductModel> getAllProducts() {
     return ResponseEntity.status(HttpStatus.OK).body(product.get());
   }
 
-}
+}*/

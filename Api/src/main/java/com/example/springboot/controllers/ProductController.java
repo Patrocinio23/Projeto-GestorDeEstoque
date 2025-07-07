@@ -1,4 +1,4 @@
-package com.example.springboot.controllers;
+/*package com.example.springboot.controllers;
 
 import com.example.springboot.dtos.ProductRecordDto;
 import com.example.springboot.models.ProductModel;
@@ -66,7 +66,7 @@ public class ProductController {
 		var productModel = new ProductModel();
 		BeanUtils.copyProperties(productRecordDto, productModel);
                 
-               // Envia o SMS após o produto ser salvo
+               /*  Envia o SMS após o produto ser salvo
                 String messageContent = "Produto novo: " + productModel.getName() + // Personalize a mensagem com o nome do produto
                                         "Caracteristicas: " + productModel.getCaracteristicas();
                 twilioService.sendSms(messageContent);
@@ -97,4 +97,4 @@ public class ProductController {
 	}
 
     
-}
+}*/
