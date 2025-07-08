@@ -25,7 +25,7 @@ public class EstoqueModel extends RepresentationModel<EstoqueModel> implements S
 
 		@ManyToOne
         @JoinColumn(name = "id_product")
-        private ProductModel produto;
+        private ProductModel product;
 
         
         
@@ -45,6 +45,16 @@ public class EstoqueModel extends RepresentationModel<EstoqueModel> implements S
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+
+    public ProductModel getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductModel product) {
+        this.product = product;
+    }
+
+
         
       
 }

@@ -4,6 +4,7 @@ package com.example.springboot.repositories;
 
 import com.example.springboot.models.EstoqueModel;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,9 @@ public interface EstoqueRepository extends JpaRepository<EstoqueModel, Integer> 
        nativeQuery = true) 
            
     List<Object[]> findProductDetailsByProductId(@Param("idProduct") Long idProduct);
+
+     Optional<EstoqueModel> findByProduct_IdProduct(Integer idProduct);
+
     
 }
    

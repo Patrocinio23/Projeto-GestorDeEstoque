@@ -18,6 +18,8 @@ public class ProductService {
 
 @Autowired
 ProductRepository productRepository;
+
+@Autowired
 CategoriaRepository categoriaRepository;
 
 

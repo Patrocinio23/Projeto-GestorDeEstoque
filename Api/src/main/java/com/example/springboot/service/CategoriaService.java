@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.example.springboot.dtos.CategoriaRecordDto;
 import com.example.springboot.models.CategoriaModel;
 import com.example.springboot.repositories.CategoriaRepository;
@@ -27,14 +28,14 @@ public class CategoriaService {
     }
 
     //3. Listar Categoria por id
-    public CategoriaModel getCategoriaById(Integer id){
+    public CategoriaModel getCategoriaById(Long id){
         return categoriaRepository.findById(id) 
           .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada com o ID: " + id));
     
     }
 
     //4. deletar categoria usando id
-    public void deleteCategoria(Integer id){
+    public void deleteCategoria(Long id){
         CategoriaModel categoria = getCategoriaById(id);
         categoriaRepository.delete(categoria);
     }
