@@ -29,6 +29,7 @@ public class CategoriaModel implements Serializable {
 
     @OneToMany(mappedBy = "categoria")
     private List<ProductModel> produtos;
+    
     public Long getId() {
         return id; 
     }
