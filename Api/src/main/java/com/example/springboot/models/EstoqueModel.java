@@ -1,13 +1,17 @@
 
 package com.example.springboot.models;
 
+import java.io.Serializable;
+
+import org.springframework.hateoas.RepresentationModel;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.io.Serializable;
-import org.springframework.hateoas.RepresentationModel;
 
 @Entity
 @Table(name = "tb_estoque")
@@ -17,8 +21,12 @@ public class EstoqueModel extends RepresentationModel<EstoqueModel> implements S
         @Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
         private Integer idEstoque;
-	    private Integer idProduct;
         public Integer quantidade;
+
+		@ManyToOne
+        @JoinColumn(name = "id_product")
+        private ProductModel product;
+
         
         
         public Integer getidEstoque() {
@@ -29,14 +37,7 @@ public class EstoqueModel extends RepresentationModel<EstoqueModel> implements S
 		this.idEstoque = idEstoque;
         }
 
-	public Integer getidProduct() {
-		return idProduct;
-	}
-
-	public void setidProduct(Integer idProduct) {
-		this.idProduct = idProduct;
-	}
-
+	
 	public Integer getQuantidade() {
 		return quantidade;
 	}
@@ -44,6 +45,16 @@ public class EstoqueModel extends RepresentationModel<EstoqueModel> implements S
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+
+    public ProductModel getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductModel product) {
+        this.product = product;
+    }
+
+
         
       
 }

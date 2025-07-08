@@ -44,12 +44,12 @@ public ResponseEntity<List<CategoriaModel>> getAllCategoria() {
     
 
 @GetMapping("/{id}")
-public ResponseEntity<CategoriaModel> getCategoriaById(@PathVariable Integer id) {
+public ResponseEntity<CategoriaModel> getCategoriaById(@PathVariable Long id) {
     return ResponseEntity.ok(categoriaService.getCategoriaById(id));
 }
 
 @DeleteMapping("/{id}")
-public ResponseEntity<String> deleteCategoria(@PathVariable Integer id) {
+public ResponseEntity<String> deleteCategoria(@PathVariable Long id) {
     categoriaService.deleteCategoria(id);
     return ResponseEntity.ok("Categoria deletada com sucesso");
 

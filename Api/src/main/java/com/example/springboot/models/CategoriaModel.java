@@ -1,7 +1,15 @@
 package com.example.springboot.models;
 
 import java.io.Serializable;
-import jakarta.persistence.*;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 
 
@@ -19,8 +27,11 @@ public class CategoriaModel implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @OneToMany(mappedBy = "categoria")
+    private List<ProductModel> produtos;
+    
     public Long getId() {
-        return id;
+        return id; 
     }
     
     public void setId(Long id) {

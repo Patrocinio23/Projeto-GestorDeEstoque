@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.springboot.dtos.EstoqueRecordDto;
 import com.example.springboot.models.EstoqueModel;
+import com.example.springboot.models.ProductModel;
 import com.example.springboot.repositories.EstoqueRepository;
+import com.example.springboot.repositories.ProductRepository;
 
 @Service
 public class EstoqueService {
@@ -17,16 +19,22 @@ public class EstoqueService {
 @Autowired
 private EstoqueRepository estoqueRepository;
 
+@Autowired
+private ProductRepository productRepository;
+
 public EstoqueModel saveEstoque(EstoqueRecordDto estoqueRecordDto) {
  Optional<EstoqueModel> estoque = estoqueRepository.findById(estoqueRecordDto.idProduct());
  
  if (estoque.isPresent()) {
     throw new IllegalArgumentException("Produto já cadastrado no estoque.");
 }
-
+// Busca o produto pelo idProduct no banco
+    ProductModel product = productRepository.findById(estoqueRecordDto.idProduct())
+        .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+        
  EstoqueModel estoqueModel = new EstoqueModel();
  BeanUtils.copyProperties(estoqueRecordDto, estoqueModel);
- estoqueModel.setidProduct(estoqueRecordDto.idProduct()); 
+ estoqueModel.setProduct(product); 
  estoqueModel.setQuantidade(estoqueRecordDto.quantidade()); // 👉 Define a quantidade
 
  return estoqueRepository.save(estoqueModel);
