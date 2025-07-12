@@ -1,4 +1,4 @@
 package com.example.springboot.dtos;
 
 
-public record AddItemCarrinhoDto(Long idCarrinho, Integer idProduct, Integer quantidade) {}
+public record AddItemCarrinhoDto(Long idCarrinho, Long idProduct, Integer quantidade) {}

@@ -34,7 +34,7 @@ public class ProductModel extends RepresentationModel<ProductModel> implements S
     this.categoria = categoria;
     }
  
-	public Long getIdProduct() {
+	public Long getidProduct() {
 		return idProduct;
 	}
 

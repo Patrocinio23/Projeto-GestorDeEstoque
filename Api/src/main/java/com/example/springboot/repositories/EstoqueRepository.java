@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository;
 import com.example.springboot.models.EstoqueModel;
 
 @Repository
-public interface EstoqueRepository extends JpaRepository<EstoqueModel, Integer> {
+public interface EstoqueRepository extends JpaRepository<EstoqueModel, Long> {
    
 
-     Optional<EstoqueModel> findByProduct_IdProduct(Integer idProduct);
+     Optional<EstoqueModel> findByProduct_IdProduct(Long idProduct);
 
     
 }

@@ -1,10 +1,11 @@
 package com.example.springboot.models;
 
-import org.springframework.data.annotation.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -26,6 +27,7 @@ import jakarta.persistence.Table;
 
     @ManyToOne
     @JoinColumn(name = "id_carrinho")
+    @JsonBackReference
     private CarrinhoModel carrinho;
 
     // Getters e Setters
@@ -54,9 +56,6 @@ import jakarta.persistence.Table;
         this.quantidade = quantidade;
     }
 
-    public Long getIdProduct() {
-        return id;
-    }
-
+   
 }
 

@@ -56,12 +56,12 @@ public ResponseEntity<EstoqueModel> saveEstoque(@RequestBody @Valid EstoqueRecor
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EstoqueModel> getEstoqueById(@PathVariable Integer id) { 
+    public ResponseEntity<EstoqueModel> getEstoqueById(@PathVariable Long id) { 
         return ResponseEntity.ok(estoqueService.getEstoqueById(id));
     } 
 
     @DeleteMapping("{id}")
-    public ResponseEntity<EstoqueModel> deleteEstoque(@PathVariable Integer id) {
+    public ResponseEntity<EstoqueModel> deleteEstoque(@PathVariable Long id) {
       return ResponseEntity.ok(estoqueService.deleteEstoque(id));
 
     }

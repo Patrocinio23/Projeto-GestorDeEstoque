@@ -64,7 +64,7 @@ public class CarrinhoService {
             .orElseThrow(() -> new RuntimeException("Carrinho não encontrado"));
 
         for (ItemCarrinhoModel item : carrinho.getItens()) {
-            EstoqueModel estoque = estoqueRepository.findByProduct_IdProduct(item.getProduto().getIdProduct())
+            EstoqueModel estoque = estoqueRepository.findByProduct_IdProduct(item.getProduto().getidProduct())
                 .orElseThrow(() -> new RuntimeException("Produto sem estoque"));
 
             if (estoque.getQuantidade() < item.getQuantidade())

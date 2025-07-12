@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.example.springboot.dtos.ProductRecordDto;
 import com.example.springboot.models.ProductModel;
 import com.example.springboot.service.ProductService;
@@ -45,7 +46,7 @@ public class ProductController {
 	
 	
    @GetMapping("/products/{id}")
-    public ResponseEntity<Object> getOneProduct(@PathVariable Integer id){
+    public ResponseEntity<Object> getOneProduct(@PathVariable Long id){
 	    ProductModel product = productService.getOneProduct(id);
 		return ResponseEntity.ok(product);
 	}
@@ -64,7 +65,7 @@ public class ProductController {
 	}*/
 	
 	@DeleteMapping("/products/{id}")
-	public ResponseEntity<Object> deleteProduct(@PathVariable Integer id) {
+	public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
 		ProductModel product = productService.getOneProduct(id);
 		if(product == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
@@ -80,7 +81,7 @@ public class ProductController {
 	
 	
 	@PutMapping("/products/{id}")
-	public ResponseEntity<Object> updateProduct(@PathVariable Integer id, @RequestBody @Valid ProductRecordDto productRecordDto) {
+	public ResponseEntity<Object> updateProduct(@PathVariable Long id, @RequestBody @Valid ProductRecordDto productRecordDto) {
 		ProductModel product = productService.getOneProduct(id);
 		if(product == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");

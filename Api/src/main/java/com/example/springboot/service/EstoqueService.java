@@ -42,7 +42,7 @@ public EstoqueModel saveEstoque(EstoqueRecordDto estoqueRecordDto) {
   }
 
 
-public EstoqueModel updateEstoque(Integer id, String acao, EstoqueRecordDto estoqueRecordDto){
+public EstoqueModel updateEstoque(Long id, String acao, EstoqueRecordDto estoqueRecordDto){
 Optional<EstoqueModel> estoque = estoqueRepository.findById(id);
 if(estoque.isPresent()){
     EstoqueModel estoqueModel = estoque.get();
@@ -73,7 +73,7 @@ if(estoque.isPresent()){
     }
 
 
-    public EstoqueModel getEstoqueById(Integer id) {
+    public EstoqueModel getEstoqueById(Long id) {
         Optional<EstoqueModel>estoque = estoqueRepository.findById(id);
 
         if(estoque.isPresent()){
@@ -83,7 +83,7 @@ if(estoque.isPresent()){
         }
     }
 
-    public EstoqueModel deleteEstoque(Integer id) {
+    public EstoqueModel deleteEstoque(Long id) {
         Optional<EstoqueModel>estoque =  estoqueRepository.findById(id);
 
         if(estoque.isPresent()) {

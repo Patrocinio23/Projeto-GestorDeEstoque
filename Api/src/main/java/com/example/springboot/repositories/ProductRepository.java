@@ -8,7 +8,7 @@ import com.example.springboot.models.ProductModel;
 
 
 @Repository
-public interface ProductRepository extends JpaRepository<ProductModel, Integer>{
+public interface ProductRepository extends JpaRepository<ProductModel, Long>{
 
 
 }

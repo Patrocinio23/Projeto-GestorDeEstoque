@@ -45,7 +45,7 @@ public List<ProductModel> getAllProducts() {
  */ 
 
 
- public ProductModel getOneProduct(Integer id) {
+ public ProductModel getOneProduct(Long id) {
     Optional<ProductModel> product = productRepository.findById(id);
     if (product.isPresent()) {
       return product.get(); 
@@ -70,7 +70,7 @@ public List<ProductModel> getAllProducts() {
   
   }
 
- public void deleteProduct(Integer id) {
+ public void deleteProduct(Long id) {
     Optional<ProductModel> product = productRepository.findById(id);
     if(product.isPresent()){
        productRepository.delete(product.get());
@@ -78,7 +78,7 @@ public List<ProductModel> getAllProducts() {
   
 }
 
-public ProductModel updateProduct(Integer id, ProductRecordDto productRecordDto){
+public ProductModel updateProduct(Long id, ProductRecordDto productRecordDto){
   Optional<ProductModel> product = productRepository.findById(id);
   if(product.isPresent()){
     ProductModel productModel = product.get();

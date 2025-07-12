@@ -2,12 +2,13 @@ package com.example.springboot.models;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -22,6 +23,7 @@ public class CarrinhoModel {
     private Boolean finalizado = false;
 
     @OneToMany(mappedBy = "carrinho", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<ItemCarrinhoModel> itens;
 
     // Getters e Setters
